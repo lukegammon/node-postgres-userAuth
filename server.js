@@ -6,6 +6,7 @@ const PORT = process.env.PORT || 4000;
 // Middleware
 
 app.set('view engine', 'ejs');
+app.use(express.static(__dirname + '/'));
 
 // Routes
 app.get("/", (req, res) => {
