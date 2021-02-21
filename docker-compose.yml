@@ -1,0 +1,33 @@
+version: '3'
+services:
+ postgres:
+  container_name: l_postgres
+  hostname: postgres
+  build:
+    context: .
+    dockerfile: postgres.dockerfile
+  environment:
+   POSTGRES_PASSWORD: password
+   PGDATA: /var/lib/postgresql/data/pgdata
+  volumes:
+    - /data/mount:/var/lib/postgresql/data
+  #ports:
+  # - "5432:5432"
+  networks:
+   - internal_network
+
+ node:
+  hostname: node
+  container_name: l_node
+  restart: unless-stopped
+  build:
+   context: .
+   dockerfile: node.dockerfile
+  volumes:
+   - ./:/app:rw
+  networks:
+   - internal_network
+
+networks:
+ internal_network:
+  driver: bridge
