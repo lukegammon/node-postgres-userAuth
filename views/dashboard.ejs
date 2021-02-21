@@ -4,9 +4,29 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+  <link href="/css/style.css" rel="stylesheet" type="text/css">
+  <title>User Dashboard</title>
 </head>
 <body>
-  <h1>Welcome <%= user %></h1>
+
+  <main>
+    <section class="login-section">
+        <h1>Welcome <%= user %>, Succesfully Logged In</h1>
+          <div id="register-btn">
+            <input type="submit" value="Logout">
+          </div>
+    </section>
+  <section class="social-section">
+    <div class="social-center">
+      <h2>Find us on Social</h2>
+      <div class="social-links">
+          <img src="../img/facebook-logo.svg" class="social-logo">
+          <img src="../img/instagram-logo.svg" class="social-logo">
+          <img src="../img/twitter-logo.svg" class="social-logo">
+          <img src="../img/youtube-logo.svg" class="social-logo">
+      </div>
+    </div>
+  </section>
+</main>
 </body>
 </html>
