@@ -10,7 +10,7 @@ app.use(express.static(__dirname + '/'));
 
 // Routes
 app.get("/", (req, res) => {
-  res.render('index');
+  res.render('login');
 });
 
 app.get("/users/register", (req, res) => {
