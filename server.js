@@ -2,6 +2,8 @@ const express = require("express");
 const app = express();
 const { pool } = require('./dbConfig');
 const bcrypt = require("bcrypt");
+const session = require("express-session");
+const flash = require("express-flash");
 
 const PORT = process.env.PORT || 4000;
 
@@ -9,9 +11,13 @@ const PORT = process.env.PORT || 4000;
 
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/'));
-
 app.use(express.urlencoded({ extended: false }));
-
+app.use(session({
+  secret: 'secret',
+  resave: false,
+  saveinitialized: false
+}));
+app.use(flash());
 // Routes
 app.get("/", (req, res) => {
   res.render('login');
@@ -67,6 +73,17 @@ app.post("/users/register", async (req, res) => {
         if(results.rows.length > 0) {
           errors.push({message: "Email already registered"});
           res.render('register', {errors});
+        } else {
+          pool.query(
+            `INSERT INTO users (name, email, password) VALUES ($1,$2,$3) RETURNING id, password`, [name, email, hashedPassword], (err, results) => {
+              if(err) {
+                throw err;
+              }
+              console.log(results);
+              req.flash('success_msg', "You are now registered, Please log in");
+              res.redirect('/users/login');
+            }
+          )
         }
       }
     );
