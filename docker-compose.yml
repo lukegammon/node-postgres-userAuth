@@ -7,17 +7,20 @@ services:
     context: .
     dockerfile: postgres.dockerfile
   environment:
-   POSTGRES_PASSWORD: password
-   PGDATA: /var/lib/postgresql/data/pgdata
+    POSTGRES_USER: luke
+    POSTGRES_PASSWORD: 12345
+    PGDATA: /var/lib/postgresql/data/pgdata
   volumes:
     - /data/mount:/var/lib/postgresql/data
   #ports:
-  # - "5432:5432"
+   #- "5432:5432"
   networks:
    - internal_network
 
  node:
   hostname: node
+  ports:
+    - "4000:4000"
   container_name: l_node
   restart: unless-stopped
   build:

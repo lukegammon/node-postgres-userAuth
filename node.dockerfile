@@ -8,6 +8,6 @@ COPY server.js /app/
 
 RUN npm install express --save
 
-RUN npm install 
+RUN npm install
 
 CMD [ "node", "server.js" ]
