@@ -12,6 +12,7 @@ initializePassport(passport);
 
 const PORT = process.env.PORT || 4000;
 
+
 // Middleware
 
 app.set('view engine', 'ejs');
@@ -20,7 +21,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(session({
   secret: 'secret',
   resave: false,
-  saveinitialized: false
+  saveUninitialized: true
 }));
 app.use(passport.initialize());
 app.use(passport.session());
